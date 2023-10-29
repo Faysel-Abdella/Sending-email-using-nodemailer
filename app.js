@@ -15,7 +15,7 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/send-email", (req, res) => {
-  const { name, email, phone, message } = req.body;
+  const { name, email, phone, details } = req.body;
 
   // if (!name || !email || !location) {
   //   return res.status(400).json({ message: "Please provide the all info" });
@@ -36,7 +36,7 @@ app.post("/send-email", (req, res) => {
       from: email,
       to: "faytonext@gmail.com",
       subject: "New Email From Portfolio",
-      text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
+      text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${details}`,
     };
 
     // Send the email
@@ -46,6 +46,7 @@ app.post("/send-email", (req, res) => {
         res.status(500).send("Error sending email");
       } else {
         console.log("Email sent successfully");
+        console.log(mailOptions);
         res.send("Email sent");
       }
     });
